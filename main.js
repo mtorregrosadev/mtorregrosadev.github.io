@@ -134,6 +134,7 @@
   // ── Navbar active link ───────────────────────────────────────
   const sections = Array.from(document.querySelectorAll('section[id]'));
   const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+  const menubar  = document.getElementById('menubar');
 
   function setActive(id) {
     navLinks.forEach(a => {
@@ -144,6 +145,15 @@
       }
     });
   }
+
+  // Toggle compact class on scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      menubar.classList.add('scrolled');
+    } else {
+      menubar.classList.remove('scrolled');
+    }
+  }, { passive: true });
 
   if ('IntersectionObserver' in window) {
     const obs = new IntersectionObserver(entries => {

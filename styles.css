@@ -922,29 +922,104 @@ footer a:hover { text-decoration: underline; }
 
 /* ── Mobile ─────────────────────────────────────────────────────── */
 
-/* Navbar 2-row layout on small screens */
+/* Redesigned Mobile Navbar: Pill + Liquid Glass Retro */
 @media (max-width: 640px) {
-  html { scroll-padding-top: 92px; }
+  html { scroll-padding-top: 220px; }
+  
   #menubar {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    right: 12px;
     height: auto;
-    flex-wrap: wrap;
-    padding: 8px 12px 4px;
-    gap: 4px;
+    background: rgba(250, 247, 240, 0.95); /* Even more opaque for retro feel */
+    backdrop-filter: blur(14px) saturate(180%);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    border: 3px solid var(--ink);
+    border-radius: 20px;
+    padding: 32px 16px 44px; /* MASSIVE padding: 32px top, 44px bottom */
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 20px; /* Increased gap */
+    box-shadow: 4px 4px 0 var(--ink);
+    z-index: 1000;
+    transition: all 0.2s ease-out; /* Snappier, faster transition */
+    overflow: hidden;
   }
-  .nav-logo { flex: 1; font-size: 12px; }
-  .lang-switch { margin-left: 0; }
-  .nav-links {
-    order: 3;
+
+  /* Compact state on scroll */
+  #menubar.scrolled {
+    padding: 12px 16px;
+    gap: 0;
+    border-radius: 30px;
+    top: 10px;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  
+  #menubar.scrolled .nav-logo,
+  #menubar.scrolled .lang-switch {
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    border: none;
+  }
+
+  .nav-logo { 
+    font-size: 14px;
     width: 100%;
-    overflow-x: auto;
-    scrollbar-width: none;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    padding-bottom: 4px;
-    gap: 2px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px dashed var(--gray2);
+    padding-bottom: 12px;
+    margin-top: 4px; /* Extra space from top border */
+    max-height: 38px; /* Tighter max-height for instant transition */
+    transition: all 0.2s ease-out;
+    opacity: 1;
   }
-  .nav-links::-webkit-scrollbar { display: none; }
+  
+  .nav-links {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 0;
+  }
+  
+  .nav-links a {
+    font-size: 10px;
+    padding: 6px 10px;
+    border: 2px solid var(--ink);
+    background: var(--cream);
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .nav-links a[data-active] {
+    background: var(--forest);
+    color: var(--cream);
+  }
+
+  .lang-switch { 
+    position: static;
+    margin-left: 0;
+    justify-content: center;
+    width: 100%;
+    gap: 8px;
+    padding-top: 8px;
+    margin-bottom: 8px; /* Extra space from bottom border */
+    max-height: 44px; /* Tighter max-height for instant transition */
+    transition: all 0.2s ease-out;
+    opacity: 1;
+  }
+  .lang-btn {
+    font-size: 11px;
+    padding: 5px 12px;
+    border: 2px solid var(--ink) !important;
+    background: var(--cream);
+    box-shadow: 2px 2px 0 var(--ink);
+  }
 }
 
 @media (max-width: 768px) {
@@ -952,7 +1027,10 @@ footer a:hover { text-decoration: underline; }
   .nav-logo { font-size: 13px; }
   .nav-links a { font-size: 12px; padding: 4px 8px; }
 
-  #hero { padding: 56px 20px 64px; min-height: 60vh; }
+  #hero { 
+    padding: 190px 20px 40px; /* Reduced further to tighten the gap */
+    min-height: auto; 
+  }
   .hero-name { font-size: clamp(16px, 6vw, 26px); }
   .hero-role { font-size: 15px; }
 
@@ -1733,6 +1811,10 @@ a.t-link:hover .t-link-arrow { opacity: 1; }
   .spotlight-card.spot-center { flex: 1; }
   .proj-page-all-wrap { padding: 16px 12px 0; }
   .proj-page-grid { grid-template-columns: 1fr; }
+  .spotlight-section { padding: 16px 10px 14px; }
+}
+
+
   .spotlight-section { padding: 16px 10px 14px; }
 }
 
