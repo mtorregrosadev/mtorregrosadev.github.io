@@ -948,7 +948,7 @@
         `<p class="g-screen-title">${title}</p>` +
         (sub ? `<p class="g-screen-sub">${sub}</p>` : '') +
         (btnLabel ? `<button class="game-btn primary" id="g-start" type="button">${btnLabel}</button>` : '') +
-        (hideHint ? '' : '<p class="g-screen-hint">← ↑ ↓ → to move · SPACE to pause · ESC to quit</p>');
+        (hideHint ? '' : '<p class="g-screen-hint">← ↑ ↓ → / SWIPE to move<br>SPACE / TAP to pause</p>');
       const startBtn = screen.querySelector('#g-start');
       if (startBtn) startBtn.addEventListener('click', startTick);
     }
@@ -1051,6 +1051,9 @@
       clearInterval(timer);
       document.removeEventListener('keydown', onKey, true);
       overlay.removeEventListener('click', onOverlayClick);
+      canvas.removeEventListener('touchstart', onTouchStart);
+      canvas.removeEventListener('touchmove', onTouchMove);
+      canvas.removeEventListener('touchend', onTouchEnd);
       overlay.remove();
       gameActive = false;
       focusInput();
@@ -1080,6 +1083,49 @@
       if (k === 'ArrowRight' && dir !== 'left')  { nextDir = 'right'; e.preventDefault(); e.stopPropagation(); }
     }
 
+    // ── Touch Controls (Swipe) ──────────────────────────────────
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    function onTouchStart(e) {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }
+
+    function onTouchMove(e) {
+      // Prevent scrolling the page while swiping on the canvas
+      e.preventDefault();
+    }
+
+    function onTouchEnd(e) {
+      if (!started || !alive) return;
+      
+      const touchEndX = e.changedTouches[0].screenX;
+      const touchEndY = e.changedTouches[0].screenY;
+      const dx = touchEndX - touchStartX;
+      const dy = touchEndY - touchStartY;
+      const absDx = Math.abs(dx);
+      const absDy = Math.abs(dy);
+
+      // Threshold to distinguish swipe from tap
+      if (Math.max(absDx, absDy) > 30) {
+        if (absDx > absDy) {
+          // Horizontal swipe
+          if (dx > 0 && dir !== 'left')  nextDir = 'right';
+          if (dx < 0 && dir !== 'right') nextDir = 'left';
+        } else {
+          // Vertical swipe
+          if (dy > 0 && dir !== 'up')   nextDir = 'down';
+          if (dy < 0 && dir !== 'down') nextDir = 'up';
+        }
+      } else {
+        // Tap to pause/resume
+        paused = !paused;
+        if (paused) showScreen('PAUSED', null, 'RESUME', true); // hide hints on pause screen
+        else        hideScreen();
+      }
+    }
+
     function onOverlayClick(e) {
       const action = e.target.getAttribute && e.target.getAttribute('data-action');
       if (action === 'quit') return close();
@@ -1091,6 +1137,11 @@
 
     document.addEventListener('keydown', onKey, true);
     overlay.addEventListener('click', onOverlayClick);
+    
+    // Attach touch listeners to canvas
+    canvas.addEventListener('touchstart', onTouchStart, { passive: false });
+    canvas.addEventListener('touchmove', onTouchMove, { passive: false });
+    canvas.addEventListener('touchend', onTouchEnd);
 
     reset();
   }
