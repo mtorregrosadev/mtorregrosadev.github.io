@@ -40,7 +40,9 @@
     "exp-sales-b1": "Planning and running educational activities and summer camps for children.",
     "exp-sales-b2": "Managing groups of children, resolving conflicts, and communicating with families.",
     "footer-built": "Built with retro vibes",
-    "cv-link-label": "Download CV"
+    "cv-link-label": "Download CV",
+    "proj-clawd-desc": "Dashboard to see how much Claude usage you have left in real time.",
+    "cert-english": "English B2.2"
   },
   "es": {
     "nav-about": "Sobre mí",
@@ -83,7 +85,9 @@
     "exp-sales-b1": "Planificación y dinamización de actividades educativas y campamentos de verano para niños.",
     "exp-sales-b2": "Gestión de grupos de niños, resolución de conflictos y comunicación con las familias.",
     "footer-built": "Hecho con vibes retro",
-    "cv-link-label": "Descargar CV"
+    "cv-link-label": "Descargar CV",
+    "proj-clawd-desc": "Dashboard para ver cuánto uso de Claude te queda en tiempo real.",
+    "cert-english": "Inglés B2.2"
   },
   "ca": {
     "nav-about": "Sobre mi",
@@ -126,6 +130,8 @@
     "exp-sales-b1": "Planificació i dinamització d'activitats educatives i casals d'estiu per a infants.",
     "exp-sales-b2": "Gestió de grups d'infants, resolució de conflictes i comunicació amb les famílies.",
     "footer-built": "Fet amb vibes retro",
-    "cv-link-label": "Descarregar CV"
+    "cv-link-label": "Descarregar CV",
+    "proj-clawd-desc": "Dashboard per veure quant ús de Claude et queda en temps real.",
+    "cert-english": "Anglès B2.2"
   }
 }

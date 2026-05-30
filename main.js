@@ -32,7 +32,9 @@
       "exp-sales-period": "July 2023 — June 2025 · Barcelona",
       "exp-sales-b1": "Planning and running educational activities and summer camps for children.",
       "exp-sales-b2": "Managing groups of children, resolving conflicts, and communicating with families.",
-      "footer-built": "Built with retro vibes", "cv-link-label": "Download CV"
+      "footer-built": "Built with retro vibes", "cv-link-label": "Download CV",
+      "proj-clawd-desc": "Dashboard to see how much Claude usage you have left in real time.",
+      "cert-english": "English B2.2"
     },
     es: {
       "nav-about": "Sobre mí", "nav-skills": "Habilidades", "nav-experience": "Experiencia",
@@ -61,7 +63,9 @@
       "exp-sales-period": "Julio 2023 — Junio 2025 · Barcelona",
       "exp-sales-b1": "Planificación y dinamización de actividades educativas y campamentos de verano para niños.",
       "exp-sales-b2": "Gestión de grupos de niños, resolución de conflictos y comunicación con las familias.",
-      "footer-built": "Hecho con vibes retro", "cv-link-label": "Descargar CV"
+      "footer-built": "Hecho con vibes retro", "cv-link-label": "Descargar CV",
+      "proj-clawd-desc": "Dashboard para ver cuánto uso de Claude te queda en tiempo real.",
+      "cert-english": "Inglés B2.2"
     },
     ca: {
       "nav-about": "Sobre mi", "nav-skills": "Habilitats", "nav-experience": "Experiència",
@@ -90,7 +94,9 @@
       "exp-sales-period": "Juliol 2023 — Juny 2025 · Barcelona",
       "exp-sales-b1": "Planificació i dinamització d'activitats educatives i casals d'estiu per a infants.",
       "exp-sales-b2": "Gestió de grups d'infants, resolució de conflictes i comunicació amb les famílies.",
-      "footer-built": "Fet amb vibes retro", "cv-link-label": "Descarregar CV"
+      "footer-built": "Fet amb vibes retro", "cv-link-label": "Descarregar CV",
+      "proj-clawd-desc": "Dashboard per veure quant ús de Claude et queda en temps real.",
+      "cert-english": "Anglès B2.2"
     }
   };
 
@@ -105,6 +111,10 @@
     document.querySelectorAll('[data-i18n-html]').forEach(el => {
       const key = el.getAttribute('data-i18n-html');
       if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+    document.querySelectorAll('[data-i18n-desc]').forEach(el => {
+      const key = el.getAttribute('data-i18n-desc');
+      if (t[key] !== undefined) el.setAttribute('data-modal-desc', t[key]);
     });
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.lang === lang);
@@ -146,12 +156,17 @@
     });
   }
 
-  // Toggle compact class on scroll
+  // Toggle compact class on scroll (optimized)
+  let isScrolled = false;
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      menubar.classList.add('scrolled');
-    } else {
-      menubar.classList.remove('scrolled');
+    const shouldBeScrolled = window.scrollY > 50;
+    if (shouldBeScrolled !== isScrolled) {
+      isScrolled = shouldBeScrolled;
+      if (isScrolled) {
+        menubar.classList.add('scrolled');
+      } else {
+        menubar.classList.remove('scrolled');
+      }
     }
   }, { passive: true });
 
@@ -223,6 +238,18 @@
           img.src       = src;
           img.alt       = d.modalImgalt || '';
           img.className = 'modal-carr-img' + (i === 0 ? ' active' : '');
+          
+          // Open lightbox on click
+          img.addEventListener('click', () => {
+            const lightbox = document.getElementById('lightbox-overlay');
+            const lImg = document.getElementById('lightbox-img');
+            if(lightbox && lImg) {
+              lImg.src = src;
+              lightbox.classList.add('is-open');
+              lightbox.removeAttribute('aria-hidden');
+            }
+          });
+          
           track.appendChild(img);
         });
       } else {
@@ -271,21 +298,23 @@
       overlay.setAttribute('aria-hidden', 'true');
     }
 
-    // open on card click (not on link click)
-    document.querySelectorAll('.project-win').forEach(card => {
-      card.addEventListener('click', e => {
-        if (e.target.closest('.project-link')) return;
-        openModal(card);
-      });
-      card.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') openModal(card);
-      });
-    });
-
     closeBtn?.addEventListener('click', closeModal);
     closeBtn?.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') closeModal(); });
     overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal(); });
+
+    // open on card click (not on link click)
+    document.querySelectorAll('.project-win').forEach(card => {
+      card.addEventListener('click', e => {
+        // Prevent opening if clicking a link or inside the spotlight carousel
+        if (e.target.closest('.project-link') || card.closest('.spotlight-track') || card.closest('.proj-page-grid')) return;
+        openModal(card);
+      });
+      card.addEventListener('keydown', e => {
+        if (card.closest('.spotlight-track') || card.closest('.proj-page-grid')) return;
+        if (e.key === 'Enter' || e.key === ' ') openModal(card);
+      });
+    });
   })();
 
   // ── Projects carousel ────────────────────────────────────────
@@ -381,8 +410,15 @@
       const imgs = d.modalImgs
         ? d.modalImgs.split(',').map(s => s.trim()).filter(Boolean)
         : (d.modalImg ? [d.modalImg] : []);
-      return { name: d.modalName, icon: d.modalIcon, award: d.modalAward,
-               img: imgs[0] || '', tags: (d.modalTags || '').split(','), realIdx: ((i % n) + n) % n };
+      return { 
+        name: d.modalName, 
+        icon: d.modalIcon, 
+        award: d.modalAward,
+        desc: d.modalDesc, /* Added description */
+        img: imgs[0] || '', 
+        tags: (d.modalTags || '').split(','), 
+        realIdx: ((i % n) + n) % n 
+      };
     }
 
     function renderSpotCard(el, i) {
@@ -395,6 +431,7 @@
         `</div>` +
         `<div class="spot-info">` +
           `<div class="spot-name">${d.name || ''}</div>` +
+          (el.classList.contains('spot-center') && d.desc ? `<div class="spot-desc">${d.desc}</div>` : '') +
           `<div class="tag-list">${d.tags.map(t => `<span class="tag">${t.trim()}</span>`).join('')}</div>` +
         `</div>`;
       el.dataset.realIdx = d.realIdx;
@@ -450,6 +487,7 @@
     }
 
     expandBtn.addEventListener('click', () => openProjectsPage(0));
+
     closeBtn.addEventListener('click', closeProjectsPage);
     closeBtn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') closeProjectsPage(); });
     overlay.addEventListener('click', e => { if (e.target === overlay) closeProjectsPage(); });
@@ -1143,6 +1181,28 @@
     canvas.addEventListener('touchmove', onTouchMove, { passive: false });
     canvas.addEventListener('touchend', onTouchEnd);
 
+
     reset();
   }
+
+  // ── Lightbox Logic ───────────────────────────────────────────
+  (function() {
+    const overlay = document.getElementById('lightbox-overlay');
+    const closeBtn = document.getElementById('lightbox-close');
+    
+    if (!overlay || !closeBtn) return;
+
+    function closeLightbox() {
+      overlay.classList.remove('is-open');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeLightbox();
+    });
+  })();
 })();
