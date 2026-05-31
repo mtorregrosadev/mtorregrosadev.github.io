@@ -1,121 +1,100 @@
-# mtorregrosa.dev
+# 🕹️ mtorregrosa.dev
 
-Personal portfolio for Marc Lumbreras — Computer Engineering student at La Salle Campus Barcelona.
+<p align="center">
+  <strong>Personal portfolio of Marc Lumbreras</strong><br />
+  <em>Junior Developer & Computer Engineering student @ La Salle BCN</em>
+</p>
 
-No build step. No dependencies. Pure HTML + CSS + JS.
-Open `index.html` in a browser or serve with any HTTP server.
-
-> Future domain: [mtorregrosa.is-a.dev](https://mtorregrosa.is-a.dev)
-
----
-
-## Sections
-
-- **About** — Bio, location, current role, and education
-- **Skills** — 20 technologies (Languages, Frameworks, Cloud & IoT, Tools & OS, Certifications)
-- **Experience** — 3 positions (Algorithmics, MICA ECO, CJS Som-hi Tots!)
-- **Projects** — 7 projects in a carousel; click any card to open a modal with image carousel and details
-- **Contact** — Interactive terminal
+<p align="center">
+  <a href="https://mtorregrosadev.github.io">
+    <img src="https://img.shields.io/badge/Live-mtorregrosa.is--a.dev-blue?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Live Site" />
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
+  </a>
+</p>
 
 ---
 
-## File structure
+## 🎨 Gallery
 
-```
+| **Desktop Overview** | **About Me** |
+|:---:|:---:|
+| ![Web](src/readme-hero.png) | ![About me](src/readme-about.png) |
+
+| **Projects Carousel** | **Project Details (Modal)** |
+|:---:|:---:|
+| ![Projects](src/readme-projects.png) | ![Expand Project](src/readme-modal.png) |
+
+<p align="center">
+  <strong>Interactive Snake Easter Egg</strong><br />
+  <img src="src/readme-snake.png" alt="Snake Game" width="600" />
+</p>
+
+---
+
+## 🛠️ Features & Tech Stack
+
+- **💎 Vanilla Everything:** Built with pure **HTML5**, **CSS3**, and **Vanilla JavaScript**. No frameworks, no libraries, no build steps. Just clean, optimized code.
+- **📟 Retro Aesthetic:** A responsive, pixel-perfect design inspired by classic macOS and Terminal interfaces.
+- **🌍 Dynamic i18n:** Full support for **English**, **Spanish**, and **Catalan**. Text is dynamically injected from `translations.json` without reloading the page.
+- **🖥️ Interactive Terminal:** A custom-built terminal emulator in the contact section with history support, various commands, and hidden ASCII art.
+- **⚡ High Performance:** Optimized assets served in **WebP** format and lazy-loaded for a near-instant experience.
+
+---
+
+## 🗂️ Project Structure
+
+```text
 mtorregrosa.dev/
-├── index.html          — full single-page structure
-├── styles.css          — all styles (CSS variables, retro macOS aesthetic)
-├── main.js             — navbar, project carousel, modal, terminal, snake game
-├── translations.json   — all UI text in EN / ES / CA (canonical source of truth)
-└── src/                — local images (WebP for photos, SVG for vector icons)
-    └── empreses/       — company logos (WebP)
+├── index.html          — Semantic HTML5 structure
+├── styles.css          — Retro UI system and animations
+├── main.js             — Core logic (i18n, terminal, carousel, snake)
+├── translations.json   — Centralized source for all multilingual text
+└── src/                — High-performance optimized assets
+    ├── photo.webp        — Profile picture
+    ├── clawdmeter-*.webp — Screenshots for Clawdmeter-m5fire project
+    ├── datathon-*.webp   — ML pipeline project visuals
+    ├── NearHere.webp     — App screenshot
+    ├── Dewi-Hack.webp    — Hackathon project screenshot
+    ├── interhack-*.webp  — Ruta Damm / InterHack 2026 gallery
+    └── empreses/         — Company logos (Algorithmics, Mica, Som-hi)
 ```
-
-### Images in `src/`
-
-| File | Use |
-|------|-----|
-| `photo.webp` | Profile photo |
-| `NearHere.webp` | Near-Here project |
-| `Dewi-Hack.webp` | Dewi project |
-| `Hack-rutes.webp` | Ruta Damm — image 1 |
-| `Hack-carrega.webp` | Ruta Damm — image 2 |
-| `Octopus-2.webp` | Octop-Scraper — image 1 |
-| `Octopus.webp` | Octop-Scraper — image 2 |
-| `playwright.webp` | Playwright skill icon |
-| `flet.webp` | Flet skill icon |
-| `esp32.webp` | ESP32 skill icon |
-| `PlatformIO.svg` | PlatformIO skill icon (vector) |
-| `empreses/algorithmics.webp` | Algorithmics logo |
-| `empreses/mica.webp` | MICA ECO logo |
-| `empreses/somhi.webp` | CJS Som-hi Tots! logo |
 
 ---
 
-## Running locally
+## 💻 Interactive Terminal
+
+Try these commands in the site's terminal window:
+- `help` — List all available commands.
+- `whoami` — A brief introduction.
+- `ls` — List major projects.
+- `contact` — Quick links to Email, GitHub, and LinkedIn.
+- `cat about.txt` — Read my full bio.
+- **ASCII Art:** `happymac`, `sadmac`, `bomb`, `boot`, `coffee`, `matrix`.
+
+---
+
+## 🕹️ Easter Eggs
+
+### Classic Snake Game
+Launch the classic Snake game via:
+1. Typing `snake` or `play` in the terminal.
+2. Clicking the `⌘` logo in the navbar.
+3. Entering the **Konami code**: `↑ ↑ ↓ ↓ ← → ← → B A`.
+
+---
+
+## 🚀 Running Locally
+
+The site works directly via `file://`, but a local server is recommended for the best experience with translation loading:
 
 ```bash
-# Option 1 — open directly (translations load from fallback in main.js)
-open index.html
-
-# Option 2 — serve with Python (recommended, loads translations.json)
+# Using Python
 python3 -m http.server 8080
-# then open http://localhost:8080
+
+# Using Node.js (npx)
+npx serve .
 ```
 
----
-
-## Terminal
-
-Click the `contact.txt — Terminal` window and start typing. The cursor blinks, history works with ↑/↓.
-
-### Keyboard shortcuts
-
-| Key | Action |
-|-----|--------|
-| `Enter` | Run command |
-| `↑` / `↓` | Navigate history |
-| `Ctrl+L` / `⌘+L` | Clear terminal |
-
-### Available commands
-
-| Command | Output |
-|---------|--------|
-| `help` | List all commands |
-| `whoami` | Quick intro |
-| `ls` | List projects |
-| `cat about.txt` | Full bio |
-| `cat cv.pdf` | Download CV |
-| `contact` | Email, GitHub, LinkedIn |
-| `sudo hire marc` | Permission granted |
-| `clear` | Clear screen |
-
----
-
-## Easter eggs
-
-### Snake 🕹️
-
-Three ways to launch:
-- Type `snake` or `play` in the terminal
-- Click the `⌘` logo in the navbar
-- Enter the **Konami code** anywhere on the page: `↑ ↑ ↓ ↓ ← → ← → B A`
-
-Controls: arrow keys to move, `Space` to pause, `Esc` to quit. High score saved to `localStorage`.
-
-### ASCII commands
-
-| Command | Output |
-|---------|--------|
-| `happy` / `happymac` | Happy Mac in ASCII |
-| `sad` / `sadmac` | Sad Mac (System Failure) |
-| `bomb` / `crash` | Classic bomb dialog |
-| `boot` / `reboot` | System 1.0 boot sequence |
-| `save` | Floppy disk ASCII |
-| `coffee` | Coffee cup ASCII |
-| `fortune` | Random programming quote |
-| `matrix` | Mini Matrix rain |
-| `tux` / `linux` | Tux + Marc's stack |
-| `rm -rf /` | "nice try." + bomb |
-| `sudo make me a sandwich` | "okay." |
-```
+Open your browser at `http://localhost:8080`.
