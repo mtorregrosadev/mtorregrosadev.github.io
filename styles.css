@@ -266,11 +266,19 @@ body {
 .dot.yellow { background: var(--dot-yellow); }
 .dot.green  { background: var(--dot-green); }
 
-/* Close-dot hover: shows × when clickable */
+/* Close-dot glow animation */
+@keyframes dotPulse {
+  0%   { box-shadow: 0 0 0 0px rgba(204,51,0,0.4); }
+  50%  { box-shadow: 0 0 8px 2px rgba(204,51,0,0.6); }
+  100% { box-shadow: 0 0 0 0px rgba(204,51,0,0.4); }
+}
+
 .dot.red[role="button"] {
   cursor: pointer;
   position: relative;
   transition: filter 0.1s, box-shadow 0.1s;
+  animation: dotPulse 2s infinite ease-in-out;
+  box-shadow: 0 0 4px rgba(204,51,0,0.4);
 }
 .dot.red[role="button"]::after {
   content: '×';
@@ -280,20 +288,22 @@ body {
   font-size: 9px;
   font-weight: 900;
   line-height: 1;
-  color: rgba(0,0,0,0.6);
-  opacity: 0;
+  color: rgba(0,0,0,0.7);
+  opacity: 1; /* Always visible for accessibility */
   transition: opacity 0.12s;
   pointer-events: none;
 }
 .dot.red[role="button"]:hover {
-  filter: brightness(0.82);
-  box-shadow: 0 0 0 3px rgba(204,51,0,0.28);
+  filter: brightness(1.1);
+  box-shadow: 0 0 10px 3px rgba(204,51,0,0.8);
+  animation-play-state: paused;
 }
-.dot.red[role="button"]:hover::after { opacity: 1; }
+
 /* game window uses data-action="quit" */
 .game-window .title-bar .dot.red {
   position: relative;
   transition: filter 0.1s;
+  animation: dotPulse 2s infinite ease-in-out;
 }
 .game-window .title-bar .dot.red::after {
   content: '×';
@@ -303,13 +313,15 @@ body {
   font-size: 9px;
   font-weight: 900;
   line-height: 1;
-  color: rgba(0,0,0,0.6);
-  opacity: 0;
+  color: rgba(0,0,0,0.7);
+  opacity: 1; /* Always visible */
   transition: opacity 0.12s;
   pointer-events: none;
 }
-.game-window .title-bar .dot.red:hover { filter: brightness(0.82); }
-.game-window .title-bar .dot.red:hover::after { opacity: 1; }
+.game-window .title-bar .dot.red:hover { 
+  filter: brightness(1.1);
+  animation-play-state: paused;
+}
 
 .title-text {
   position: absolute;
@@ -1201,7 +1213,7 @@ a.t-link:hover .t-link-arrow { opacity: 1; }
 .modal-overlay {
   position: fixed;
   inset: 0;
-  z-index: 900;
+  z-index: 2000; /* Above navbar */
   background: rgba(26,26,26,0.6);
   display: flex;
   align-items: center;
@@ -1637,7 +1649,7 @@ a.t-link:hover .t-link-arrow { opacity: 1; }
 .proj-page-overlay {
   position: fixed;
   inset: 0;
-  z-index: 800;
+  z-index: 2000; /* Above navbar */
   background: rgba(26,26,26,0.55);
   display: flex;
   align-items: stretch;
