@@ -832,6 +832,22 @@
     if (tHint) tHint.classList.add('is-hidden');
   }
 
+  // CTA "Get in touch" link logic
+  const ctaContact = document.querySelector('[data-i18n="hero-cta-contact"]');
+  if (ctaContact) {
+    ctaContact.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.getElementById('contact');
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+      // Small delay for scroll animation
+      setTimeout(() => {
+        tOutput.innerHTML = ''; // Always clear first
+        runCommand('contact');
+        focusInput();
+      }, 650);
+    });
+  }
+
   terminal.addEventListener('mousedown', (e) => {
     if (e.target.closest && e.target.closest('a')) return;
     // don't hijack text selection
