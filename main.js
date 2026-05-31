@@ -291,12 +291,35 @@
       overlay.classList.add('is-open');
       overlay.removeAttribute('aria-hidden');
       closeBtn.focus();
+
+      // Support mobile back button
+      if (!window.history.state || !window.history.state.modalOpen) {
+        const newState = { modalOpen: true };
+        if (window.history.state && window.history.state.projectsOpen) {
+          newState.projectsOpen = true;
+        }
+        window.history.pushState(newState, "");
+      }
     }
 
-    function closeModal() {
+    function closeModalUI() {
       overlay.classList.remove('is-open');
       overlay.setAttribute('aria-hidden', 'true');
     }
+
+    function closeModal() {
+      if (window.history.state && window.history.state.modalOpen) {
+        window.history.back();
+      } else {
+        closeModalUI();
+      }
+    }
+
+    window.addEventListener('popstate', (e) => {
+      if (!e.state || !e.state.modalOpen) {
+        closeModalUI();
+      }
+    });
 
     closeBtn?.addEventListener('click', closeModal);
     closeBtn?.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') closeModal(); });
@@ -478,13 +501,32 @@
       overlay.classList.add('is-open');
       overlay.removeAttribute('aria-hidden');
       document.body.style.overflow = 'hidden';
+
+      // Support mobile back button
+      if (!window.history.state || !window.history.state.projectsOpen) {
+        window.history.pushState({ projectsOpen: true }, "");
+      }
     }
 
-    function closeProjectsPage() {
+    function closeProjectsPageUI() {
       overlay.classList.remove('is-open');
       overlay.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     }
+
+    function closeProjectsPage() {
+      if (window.history.state && window.history.state.projectsOpen) {
+        window.history.back();
+      } else {
+        closeProjectsPageUI();
+      }
+    }
+
+    window.addEventListener('popstate', (e) => {
+      if (!e.state || !e.state.projectsOpen) {
+        closeProjectsPageUI();
+      }
+    });
 
     expandBtn.addEventListener('click', () => openProjectsPage(0));
 
