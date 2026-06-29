@@ -1,4 +1,4 @@
-# 🕹️ mtorregrosa.dev
+# mtorregrosa.is-a.dev
 
 <p align="center">
   <strong>Personal portfolio of Marc Lumbreras</strong><br />
@@ -16,7 +16,7 @@
 
 ---
 
-## 🎨 Gallery
+## Gallery
 
 | **Desktop Overview** | **About Me** |
 |:---:|:---:|
@@ -33,17 +33,17 @@
 
 ---
 
-## 🛠️ Features & Tech Stack
+## Features & Tech Stack
 
-- **💎 Vanilla Everything:** Built with pure **HTML5**, **CSS3**, and **Vanilla JavaScript**. No frameworks, no libraries, no build steps. Just clean, optimized code.
-- **📟 Retro Aesthetic:** A responsive, pixel-perfect design inspired by classic macOS and Terminal interfaces.
-- **🌍 Dynamic i18n:** Full support for **English**, **Spanish**, and **Catalan**. Text is dynamically injected from `translations.json` without reloading the page.
-- **🖥️ Interactive Terminal:** A custom-built terminal emulator in the contact section with history support, various commands, and hidden ASCII art.
-- **⚡ High Performance:** Optimized assets served in **WebP** format and lazy-loaded for a near-instant experience.
+- **Vanilla Everything:** Built with pure **HTML5**, **CSS3**, and **Vanilla JavaScript**. No frameworks, no libraries, no build steps. Just clean, optimized code.
+- **Retro Aesthetic:** A responsive, pixel-perfect design inspired by classic macOS and Terminal interfaces.
+- **Dynamic i18n:** Full support for **English**, **Spanish**, and **Catalan**. Text is dynamically injected from `translations.json` without reloading the page.
+- **Interactive Terminal:** A custom-built terminal emulator in the contact section with history support, various commands, and hidden ASCII art.
+- **High Performance:** Optimized assets served in **WebP** format and lazy-loaded for a near-instant experience.
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```text
 mtorregrosa.dev/
@@ -63,7 +63,7 @@ mtorregrosa.dev/
 
 ---
 
-## 💻 Interactive Terminal
+## Interactive Terminal
 
 Try these commands in the site's terminal window:
 - `help` — List all available commands.
@@ -75,7 +75,7 @@ Try these commands in the site's terminal window:
 
 ---
 
-## 🕹️ Easter Eggs
+## Easter Eggs
 
 ### Classic Snake Game
 Launch the classic Snake game via:
@@ -85,7 +85,7 @@ Launch the classic Snake game via:
 
 ---
 
-## 🚀 Running Locally
+## Running Locally
 
 The site works directly via `file://`, but a local server is recommended for the best experience with translation loading:
 
