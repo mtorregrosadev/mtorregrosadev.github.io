@@ -33,6 +33,8 @@
       "exp-sales-b1": "Planning and running educational activities and summer camps for children.",
       "exp-sales-b2": "Managing groups of children, resolving conflicts, and communicating with families.",
       "footer-built": "Built with retro vibes", "cv-link-label": "Download CV",
+      "proj-alvolant-card": "Live bus-service preparation and navigation with GTFS, traffic data and resilient realtime updates.",
+      "proj-alvolant-desc": "iPhone-first companion for preparing and following bus services across Barcelona's integrated transport network. Combines live GTFS and traffic data, route setup and resilient navigation in an Expo/React Native app backed by FastAPI.",
       "proj-clawd-desc": "Dashboard to see how much Claude usage you have left in real time.",
       "cert-english": "English B2.2"
     },
@@ -64,6 +66,8 @@
       "exp-sales-b1": "Planificación y dinamización de actividades educativas y campamentos de verano para niños.",
       "exp-sales-b2": "Gestión de grupos de niños, resolución de conflictos y comunicación con las familias.",
       "footer-built": "Hecho con vibes retro", "cv-link-label": "Descargar CV",
+      "proj-alvolant-card": "Preparación y navegación de servicios de autobús con GTFS, tráfico y actualizaciones resilientes en tiempo real.",
+      "proj-alvolant-desc": "Aplicación para iPhone que permite preparar y seguir servicios de autobús en la red de transporte integrada de Barcelona. Combina datos GTFS y de tráfico en directo, configuración de rutas y navegación resiliente mediante Expo/React Native y un BFF FastAPI.",
       "proj-clawd-desc": "Dashboard para ver cuánto uso de Claude te queda en tiempo real.",
       "cert-english": "Inglés B2.2"
     },
@@ -95,6 +99,8 @@
       "exp-sales-b1": "Planificació i dinamització d'activitats educatives i casals d'estiu per a infants.",
       "exp-sales-b2": "Gestió de grups d'infants, resolució de conflictes i comunicació amb les famílies.",
       "footer-built": "Fet amb vibes retro", "cv-link-label": "Descarregar CV",
+      "proj-alvolant-card": "Preparació i navegació de serveis d’autobús amb GTFS, trànsit i actualitzacions resilients en temps real.",
+      "proj-alvolant-desc": "Aplicació per a iPhone que permet preparar i seguir serveis d’autobús a la xarxa integrada de transport de Barcelona. Combina dades GTFS i de trànsit en directe, configuració de rutes i navegació resilient mitjançant Expo/React Native i un BFF FastAPI.",
       "proj-clawd-desc": "Dashboard per veure quant ús de Claude et queda en temps real.",
       "cert-english": "Anglès B2.2"
     }
@@ -238,6 +244,7 @@
           img.src       = src;
           img.alt       = d.modalImgalt || '';
           img.className = 'modal-carr-img' + (i === 0 ? ' active' : '');
+          img.style.objectFit = d.modalFit || 'cover';
           
           // Open lightbox on click
           img.addEventListener('click', () => {
