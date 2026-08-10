@@ -1,1 +1,6 @@
 /docs
+CLAUDE.md
+GEMINI.md
+Profile.pdf
+.gitignore
+.DS_Store

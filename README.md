@@ -46,13 +46,16 @@
 ## Project Structure
 
 ```text
-mtorregrosa.dev/
+mtorregrosa.is-a.dev/
 ├── index.html          — Semantic HTML5 structure
 ├── styles.css          — Retro UI system and animations
 ├── main.js             — Core logic (i18n, terminal, carousel, snake)
 ├── translations.json   — Centralized source for all multilingual text
 └── src/                — High-performance optimized assets
     ├── photo.webp        — Profile picture
+    ├── linkedin.webp     — LinkedIn avatar picture
+    ├── favicon.svg       — Retro terminal window favicon (SVG)
+    ├── favicon.webp      — Retro terminal window favicon (WebP fallback)
     ├── clawdmeter-*.webp — Screenshots for Clawdmeter-m5fire project
     ├── datathon-*.webp   — ML pipeline project visuals
     ├── NearHere.webp     — App screenshot
